@@ -1,7 +1,12 @@
+import BaseLayout from "@/components/layout/BaseLayout";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  return <div>Hello World!</div>;
+  return (
+    <BaseLayout>
+      <div className="">Hello World!</div>
+    </BaseLayout>
+  );
 };
 
 export default Home;
