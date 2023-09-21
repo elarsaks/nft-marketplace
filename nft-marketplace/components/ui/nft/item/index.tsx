@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { NftMeta } from "@/types/nft";
-import { it } from "node:test";
 import { FunctionComponent } from "react";
 
 type NftItemProps = {
