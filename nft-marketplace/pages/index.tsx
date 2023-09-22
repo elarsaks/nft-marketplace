@@ -5,11 +5,19 @@ import type { NextPage } from "next";
 import nfts from "../content/meta.json";
 import { NftMeta } from "@_types/nft";
 import { useWeb3 } from "@providers/web3";
+import { get } from "http";
 
 const Home: NextPage = () => {
-  const { ethereum } = useWeb3();
+  const { provider } = useWeb3();
 
-  console.log(ethereum);
+  const getAccounts = async () => {
+    const accounts = await provider!.listAccounts();
+    console.log(accounts); // TODO: Find out why it does not see accounts!!!
+  };
+
+  if (provider) {
+    getAccounts();
+  }
 
   return (
     <BaseLayout>
