@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Navbar } from "@/components/ui";
+import { Navbar } from "@ui";
 
 const BaseLayout: FunctionComponent<{ children?: React.ReactNode }> = ({
   children,

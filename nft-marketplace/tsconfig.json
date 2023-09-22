@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@styles": ["./styles"],
       "@ui": ["./components/ui"],
       "@ui/*": ["./components/ui/*"],
       "@providers": ["./components/providers"],
