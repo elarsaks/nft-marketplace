@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { createDefaultState, Web3State } from "./utils";
 
 interface Web3ProviderProps {
@@ -9,6 +15,19 @@ const Web3Context = createContext<Web3State>(createDefaultState());
 
 const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   const [web3Api, setWeb3Api] = useState<Web3State>(createDefaultState());
+
+  useEffect(() => {
+    function initWeb3() {
+      setWeb3Api({
+        ethereum: window.ethereum,
+        provider: null,
+        contract: null,
+        isLoading: false,
+      });
+    }
+
+    initWeb3();
+  }, []);
 
   return (
     <Web3Context.Provider value={web3Api}>{children}</Web3Context.Provider>
