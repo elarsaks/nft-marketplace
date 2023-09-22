@@ -4,17 +4,10 @@ interface Web3ProviderProps {
   children: ReactNode;
 }
 
-<<<<<<< HEAD
 const Web3Context = createContext<any>(null);
 
 const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   const [web3Api, setWeb3Api] = useState({ test: "Hello Provider!" });
-=======
-const Web3Context = createContext<Web3Api | null>(null);
-
-const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
-  const [web3Api] = useState<Web3Api>({ test: "Hello Provider!" });
->>>>>>> main
 
   return (
     /* //TODO: Fix This! */
@@ -22,11 +15,8 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   );
 };
 
-<<<<<<< HEAD
 export function useWeb3() {
   return useContext(Web3Context);
 }
 
-=======
->>>>>>> main
 export default Web3Provider;
