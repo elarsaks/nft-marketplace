@@ -9,7 +9,17 @@ import { get } from "http";
 
 const Home: NextPage = () => {
   const { provider, contract } = useWeb3();
-  console.log(contract);
+  // console.log(contract);
+
+  const getNftInfo = async () => {
+    // TODO: Find out why they dont get logged
+    console.log(await contract!.name());
+    console.log(await contract!.symbol());
+  };
+
+  if (contract) {
+    getNftInfo();
+  }
 
   const getAccounts = async () => {
     const accounts = await provider!.listAccounts();
