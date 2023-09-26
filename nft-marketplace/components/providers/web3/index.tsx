@@ -24,7 +24,7 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
       );
 
       const contract = await loadContract("NftMarket", provider);
-
+      console.log(contract);
       setWeb3Api({
         ethereum: window.ethereum,
         provider: provider,
