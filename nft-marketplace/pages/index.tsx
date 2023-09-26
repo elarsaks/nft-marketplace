@@ -8,11 +8,12 @@ import { useWeb3 } from "@providers/web3";
 import { get } from "http";
 
 const Home: NextPage = () => {
-  const { provider } = useWeb3();
+  const { provider, contract } = useWeb3();
+  console.log(contract);
 
   const getAccounts = async () => {
     const accounts = await provider!.listAccounts();
-    console.log(accounts); // TODO: Find out why it does not see accounts!!!
+    //   console.log(accounts); // TODO: Find out why it does not see accounts!!!
   };
 
   if (provider) {
