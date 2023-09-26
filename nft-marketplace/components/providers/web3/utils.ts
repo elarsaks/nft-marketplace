@@ -26,8 +26,7 @@ export const createDefaultState = (): Web3State => {
   };
 };
 
-//TODO: change to env variable
-const NETWORK_ID = 5777; //process.env.NEXT_PUBLIC_NETWORK_ID;
+const NETWORK_ID = process.env.NEXT_PUBLIC_NETWORK_ID;
 
 export const loadContract = async (
   name: string,
