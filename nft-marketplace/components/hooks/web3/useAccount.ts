@@ -1,11 +1,12 @@
-import { use } from "react";
-import useSwr from "swr";
+import { CryptoHookFactory } from "@_types/hooks";
+import useSWR from "swr";
 
 // deps provider, ethereum, contract (web3Sate)
-export const hookFactory = (deps: any) => (params: any) => {
-  const swrRes = useSwr("web3/useAccount", () => {
+export const hookFactory: CryptoHookFactory = (deps) => (params) => {
+  const swrRes = useSWR("web3/useAccount", () => {
     console.log("deps", deps);
-
+    console.log("params", params);
+    // Making a request to get data
     return "Test User";
   });
 
@@ -13,6 +14,7 @@ export const hookFactory = (deps: any) => (params: any) => {
 };
 
 export const useAccount = hookFactory({
-  ethereum: null,
-  provider: null,
+  ethereum: undefined,
+  provider: undefined,
+  // contract: null,
 });
