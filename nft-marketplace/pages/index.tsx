@@ -5,16 +5,18 @@ import type { NextPage } from "next";
 import nfts from "../content/meta.json";
 import { NftMeta } from "@_types/nft";
 import { useWeb3 } from "@providers/web3";
-import { get } from "http";
 
 const Home: NextPage = () => {
   const { provider, contract } = useWeb3();
-  // console.log(contract);
 
   const getNftInfo = async () => {
     // TODO: Find out why they dont get logged
-    console.log(await contract!.name());
-    console.log(await contract!.symbol());
+    // const name = "name"; //await contract!.name();
+    // const symbol = " symbol "; //await contract!.symbol();
+    // console.log(name);
+    // console.log(symbol);
+
+    console.log("Contract in pages: ", contract);
   };
 
   if (contract) {
