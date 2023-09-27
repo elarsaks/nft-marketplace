@@ -1,7 +1,10 @@
 import { CryptoHookFactory } from "@_types/hooks";
 import useSWR from "swr";
 
-// deps provider, ethereum, contract (web3Sate)
+type AccountHookFactory = CryptoHookFactory<string, string>;
+
+export type UseAccountHook = ReturnType<AccountHookFactory>;
+
 export const hookFactory: CryptoHookFactory<string, string> =
   (deps) => (params) => {
     const swrRes = useSWR("web3/useAccount", () => {
@@ -13,9 +16,3 @@ export const hookFactory: CryptoHookFactory<string, string> =
 
     return swrRes;
   };
-
-export const useAccount = hookFactory({
-  ethereum: undefined,
-  provider: undefined,
-  // contract: null,
-});
