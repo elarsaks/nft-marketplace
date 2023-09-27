@@ -9,28 +9,28 @@ import { useWeb3 } from "@providers/web3";
 const Home: NextPage = () => {
   const { provider, contract } = useWeb3();
 
-  const getNftInfo = async () => {
-    // TODO: Find out why they dont get logged
-    // const name = "name"; //await contract!.name();
-    // const symbol = " symbol "; //await contract!.symbol();
-    // console.log(name);
-    // console.log(symbol);
+  // const getNftInfo = async () => {
+  //   // TODO: Find out why they dont get logged
+  //   // const name = "name"; //await contract!.name();
+  //   // const symbol = " symbol "; //await contract!.symbol();
+  //   // console.log(name);
+  //   // console.log(symbol);
 
-    console.log("Contract in pages: ", contract);
-  };
+  //   console.log("Contract in pages: ", contract);
+  // };
 
-  if (contract) {
-    getNftInfo();
-  }
+  // if (contract) {
+  //   getNftInfo();
+  // }
 
-  const getAccounts = async () => {
-    const accounts = await provider!.listAccounts();
-    //   console.log(accounts); // TODO: Find out why it does not see accounts!!!
-  };
+  // const getAccounts = async () => {
+  //   const accounts = await provider!.listAccounts();
+  //   //   console.log(accounts); // TODO: Find out why it does not see accounts!!!
+  // };
 
-  if (provider) {
-    getAccounts();
-  }
+  // if (provider) {
+  //   getAccounts();
+  // }
 
   return (
     <BaseLayout>

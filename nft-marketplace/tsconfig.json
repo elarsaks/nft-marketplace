@@ -15,11 +15,13 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@hooks": ["./components/hooks"],
+      "@hooks/*": ["./components/hooks/*"],
+      "@providers": ["./components/providers"],
+      "@providers/*": ["./components/providers/*"],
       "@styles": ["./styles"],
       "@ui": ["./components/ui"],
       "@ui/*": ["./components/ui/*"],
-      "@providers": ["./components/providers"],
-      "@providers/*": ["./components/providers/*"],
       "@_types/*": ["types/*"]
     }
   },
