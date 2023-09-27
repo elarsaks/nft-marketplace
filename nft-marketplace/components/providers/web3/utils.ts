@@ -1,6 +1,7 @@
-import { Contract, ethers, providers } from "ethers";
+import { setupHooks, Web3Hooks } from "@hooks/web3/setupHooks";
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import { Web3Hooks, setupHooks } from "@hooks/web3/setupHooks";
+import { Web3Dependencies } from "@_types/hooks";
+import { Contract, ethers, providers } from "ethers";
 
 declare global {
   interface Window {
@@ -8,18 +9,16 @@ declare global {
   }
 }
 
-export type Web3Params = {
-  ethereum: MetaMaskInpageProvider | null;
-  provider: providers.Web3Provider | null;
-  contract: Contract | null;
+type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
 };
 
 export type Web3State = {
-  isLoading: boolean;
+  isLoading: boolean; // true while loading web3State
   hooks: Web3Hooks;
-} & Web3Params;
+} & Nullable<Web3Dependencies>;
 
-export const createDefaultState = (): Web3State => {
+export const createDefaultState = () => {
   return {
     ethereum: null,
     provider: null,
@@ -29,14 +28,29 @@ export const createDefaultState = (): Web3State => {
   };
 };
 
+export const createWeb3State = ({
+  ethereum,
+  provider,
+  contract,
+  isLoading,
+}: Web3Dependencies & { isLoading: boolean }) => {
+  return {
+    ethereum,
+    provider,
+    contract,
+    isLoading,
+    hooks: setupHooks({ ethereum, provider, contract }),
+  };
+};
+
 const NETWORK_ID = process.env.NEXT_PUBLIC_NETWORK_ID;
 
 export const loadContract = async (
-  name: string,
+  name: string, // NftMarket
   provider: providers.Web3Provider
 ): Promise<Contract> => {
   if (!NETWORK_ID) {
-    return Promise.reject("NETWORK_ID not defined");
+    return Promise.reject("Network ID is not defined!");
   }
 
   const res = await fetch(`/contracts/${name}.json`);
