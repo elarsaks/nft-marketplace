@@ -7,17 +7,12 @@ export type UseAccountHook = ReturnType<AccountHookFactory>;
 
 export const hookFactory: CryptoHookFactory<string, string> =
   ({ provider }) =>
-  (params) => {
-    const swrRes = useSWR("web3/useAccount", () => {
-      provider?.listAccounts();
-      console.log("deps", provider);
-      console.log("params", params);
-      // Making a request to get data
-      return "Test User";
-    });
+  () => {
+    const swrRes = useSWR(provider ? "web3/useAccount" : null, async () => {
+      const accounts = await provider!.listAccounts();
+      const account = accounts[0];
 
-    useSWR(provider ? "web3/useAccount" : null, () => {
-      return "Test User";
+      return account;
     });
 
     return swrRes;
