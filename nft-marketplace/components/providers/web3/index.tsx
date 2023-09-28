@@ -27,6 +27,13 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum as any
       );
+
+      console.log(provider);
+
+      const accounts = await provider!.listAccounts();
+
+      // TODO: Why is this empty?
+      console.log(accounts);
       const contract = await loadContract("NftMarket", provider);
 
       setWeb3Api(

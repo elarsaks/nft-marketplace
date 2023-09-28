@@ -10,6 +10,7 @@ export const hookFactory: CryptoHookFactory<string, string> =
   () => {
     const swrRes = useSWR(provider ? "web3/useAccount" : null, async () => {
       const accounts = await provider!.listAccounts();
+
       const account = accounts[0];
 
       return account;
