@@ -28,12 +28,16 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
         window.ethereum as any
       );
 
-      console.log(provider);
+      // Request account access
+      try {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+      } catch (error) {
+        console.error("User denied account access");
+        return;
+      }
 
       const accounts = await provider!.listAccounts();
 
-      // TODO: Why is this empty?
-      console.log(accounts);
       const contract = await loadContract("NftMarket", provider);
 
       setWeb3Api(
