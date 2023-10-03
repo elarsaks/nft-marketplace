@@ -5,27 +5,36 @@ type AccountHookFactory = CryptoHookFactory<string>;
 
 export type UseAccountHook = ReturnType<AccountHookFactory>;
 
-export const hookFactory: CryptoHookFactory<string, string> =
-  ({ provider }) =>
+export const hookFactory: AccountHookFactory =
+  ({ provider, ethereum }) =>
   () => {
     const swrRes = useSWR(
       provider ? "web3/useAccount" : null,
       async () => {
         const accounts = await provider!.listAccounts();
-
         const account = accounts[0];
 
         if (!account) {
-          throw new Error("Cannot get account");
+          throw "Cannot retreive account! Please, connect to web3 wallet.";
         }
 
         return account;
       },
       {
         revalidateOnFocus: false,
-        // revalidateOnReconnect: false,
       }
     );
 
-    return swrRes;
+    const connect = async () => {
+      try {
+        ethereum?.request({ method: "eth_requestAccounts" });
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    return {
+      ...swrRes,
+      connect,
+    };
   };
