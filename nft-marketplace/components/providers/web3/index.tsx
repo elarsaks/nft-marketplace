@@ -24,30 +24,29 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     async function initWeb3() {
-      const provider = new ethers.providers.Web3Provider(
-        window.ethereum as any
-      );
-
-      // Request account access
       try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-      } catch (error) {
-        console.error("User denied account access");
-        return;
+        const provider = new ethers.providers.Web3Provider(
+          window.ethereum as any
+        );
+        const contract = await loadContract("NftMarket", provider);
+
+        setWeb3Api(
+          createWeb3State({
+            ethereum: window.ethereum,
+            provider,
+            contract,
+            isLoading: false,
+          })
+        );
+      } catch (e: any) {
+        console.error("Please, install web3 wallet");
+        setWeb3Api((api) =>
+          createWeb3State({
+            ...(api as any),
+            isLoading: false,
+          })
+        );
       }
-
-      const accounts = await provider!.listAccounts();
-
-      const contract = await loadContract("NftMarket", provider);
-
-      setWeb3Api(
-        createWeb3State({
-          ethereum: window.ethereum,
-          provider,
-          contract,
-          isLoading: false,
-        })
-      );
     }
 
     initWeb3();

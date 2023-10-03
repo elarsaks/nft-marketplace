@@ -19,9 +19,6 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const { account } = useAccount();
 
-  console.log("isLoading", account.isLoading);
-  console.log("isInstalled", account.isInstalled);
-
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
