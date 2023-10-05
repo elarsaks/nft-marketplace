@@ -14,6 +14,8 @@ contract NftMarket is ERC721URIStorage {
         bool isListed;
     }
 
+    uint public listingPrice = 0.025 ether;
+
     Counters.Counter private _listedItems;
     Counters.Counter private _tokenIds;
 
@@ -46,6 +48,10 @@ contract NftMarket is ERC721URIStorage {
         uint price
     ) public payable returns (uint) {
         require(!tokenURIExists(tokenURI), "Token URI already exists");
+        require(
+            msg.value == listingPrice,
+            "Price must be equal to listing price"
+        );
 
         _tokenIds.increment();
         _listedItems.increment();
