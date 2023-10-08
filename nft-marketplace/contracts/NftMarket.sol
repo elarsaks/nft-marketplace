@@ -147,6 +147,7 @@ contract NftMarket is ERC721URIStorage {
         address to,
         uint tokenId
     ) internal virtual override {
+        //TODO: Fix this!!!
         super._beforeTokenTransfer(from, to, tokenId);
 
         // minting token
