@@ -2,35 +2,13 @@
 import { NftList } from "@ui";
 import BaseLayout from "@ui/layout/BaseLayout";
 import type { NextPage } from "next";
-import nfts from "../content/meta.json";
 import { NftMeta } from "@_types/nft";
-import { useWeb3 } from "@providers/web3";
+import { useListedNfts } from "@hooks/web3";
 
 const Home: NextPage = () => {
-  const { provider, contract } = useWeb3();
+  const { nfts } = useListedNfts();
 
-  // const getNftInfo = async () => {
-  //   // TODO: Find out why they dont get logged
-  //   // const name = "name"; //await contract!.name();
-  //   // const symbol = " symbol "; //await contract!.symbol();
-  //   // console.log(name);
-  //   // console.log(symbol);
-
-  //   console.log("Contract in pages: ", contract);
-  // };
-
-  // if (contract) {
-  //   getNftInfo();
-  // }
-
-  // const getAccounts = async () => {
-  //   const accounts = await provider!.listAccounts();
-  //   //   console.log(accounts); // TODO: Find out why it does not see accounts!!!
-  // };
-
-  // if (provider) {
-  //   getAccounts();
-  // }
+  console.log(nfts.data);
 
   return (
     <BaseLayout>
@@ -48,7 +26,7 @@ const Home: NextPage = () => {
             </p>
           </div>
 
-          <NftList nfts={nfts as NftMeta[]} />
+          <NftList nfts={nfts?.data} />
         </div>
       </div>
     </BaseLayout>
